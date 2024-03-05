@@ -7,7 +7,7 @@ const btnRemoveWord = document.querySelectorAll('.btn-remove-word');
 btnSubmitFormWords.addEventListener('click', () => {
   const wordsInput = document.querySelector('#words-input');
   const words = wordsInput.value.trim();
-  const wordsSplited = words.split(' ')
+  const wordsSplited = words.split(' ').sort()
   let wordsList = [];
 
   emptyRowTable()
@@ -40,7 +40,7 @@ function addRowToTable(words) {
   const tbody = document.querySelector('#words-table tbody');
 
   for (let index = 0; index < words.length; index++) {
-    tbody.innerHTML = `
+    tbody.innerHTML += `
       <tr>
         <td>${words[index].word}</td>
         <td>${words[index].count}</td>
