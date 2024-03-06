@@ -1,11 +1,21 @@
 const btnSubmitFormWords = document.querySelector('#btn-words-form');
-const btnRemoveWord = document.querySelectorAll('.btn-remove-word');
+
+const wordsList = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+  addRowToTable(wordsList)
+})
 
 btnSubmitFormWords.addEventListener('click', () => {
   const wordsInput = document.querySelector('#words-input');
   const words = wordsInput.value.trim();
-  const wordsSplited = words.split(' ').sort()
-  let wordsList = [];
+  let wordsSplited = []
+
+  if (wordsSplited.length > 0) {
+    wordsSplited = []
+  }
+
+  wordsSplited = words.split(' ').sort()
 
   emptyRowTable()
 
@@ -41,16 +51,31 @@ function addRowToTable(words) {
       <tr>
         <td>${words[index].word}</td>
         <td>${words[index].count}</td>
-        <td>
-          <button class="btn btn-sm btn-danger btn-remove-word">
+        <td class="word-btn-action">
+          <button data-word="${words[index].word}" class="btn btn-sm btn-danger btn-remove-word">
             Delete
           </button>
         </td>
       </tr>
     `
   }
+
+  const wordBtnAction = document.querySelectorAll('.btn-remove-word')
+
+  wordBtnAction.forEach(item => item.addEventListener('click', function(event) {
+    const selectedWord = this.dataset.word;
+
+    removeWord(selectedWord)
+  }))
+
 }
 
 function removeWord(word) {
-  alert(word)
+  const findIndex = wordsList.findIndex(item => item.word === word);
+
+  if (findIndex > -1) {
+    wordsList.splice(findIndex, 1);
+    emptyRowTable()
+    addRowToTable(wordsList)
+  }
 }
