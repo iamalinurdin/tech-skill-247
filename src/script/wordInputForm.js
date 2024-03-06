@@ -1,6 +1,7 @@
 const btnSubmitFormWords = document.querySelector('#btn-words-form');
 
 const wordsList = [];
+let wordsSplited = []
 
 document.addEventListener('DOMContentLoaded', () => {
   addRowToTable(wordsList)
@@ -9,17 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
 btnSubmitFormWords.addEventListener('click', () => {
   const wordsInput = document.querySelector('#words-input');
   const words = wordsInput.value.trim();
-  let wordsSplited = []
 
   if (wordsSplited.length > 0) {
     wordsSplited = []
   }
 
-  wordsSplited = words.split(' ').sort()
+  wordsSplited = words.split(' ')
 
   emptyRowTable()
 
-  wordsSplited.forEach((word) => {
+  wordsSplited.sort().forEach((word) => {
     const findIndex = wordsList.findIndex((wordListItem) => wordListItem.word == word)
 
     if (findIndex > -1) {
@@ -32,6 +32,7 @@ btnSubmitFormWords.addEventListener('click', () => {
     }
   })
 
+  wordsInput.value = wordsSplited.join(' ')
   addRowToTable(wordsList)
 })
 
@@ -71,10 +72,14 @@ function addRowToTable(words) {
 }
 
 function removeWord(word) {
-  const findIndex = wordsList.findIndex(item => item.word === word);
-
-  if (findIndex > -1) {
-    wordsList.splice(findIndex, 1);
+  const findIndexWordList = wordsList.findIndex(item => item.word === word);
+  const wordsInput = document.querySelector('#words-input');
+  
+  if (findIndexWordList > -1) {
+    wordsList.splice(findIndexWordList, 1);
+    wordsSplited = wordsSplited.filter(item => item !== word)
+    
+    wordsInput.value = wordsSplited.join(' ')
     emptyRowTable()
     addRowToTable(wordsList)
   }
