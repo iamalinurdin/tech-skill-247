@@ -8,13 +8,13 @@ boxInputSubmit.addEventListener('click', () => {
   boxContainer.style.display = 'none'
 
   if (boxTotal <= 12) {
-    boxContainer.style.gridTemplateColumns = 'repeat(12, minmax(auto, 1fr))'
+    boxContainer.style.gridTemplateColumns = 'repeat(2, minmax(auto, 1fr))'
   } else if (boxTotal <= 24) {
-    boxContainer.style.gridTemplateColumns = 'repeat(24, minmax(auto, 1fr))'
+    boxContainer.style.gridTemplateColumns = 'repeat(6, minmax(auto, 1fr))'
   } else if (boxTotal <= 36) {
-    boxContainer.style.gridTemplateColumns = 'repeat(36, minmax(auto, 1fr))'
+    boxContainer.style.gridTemplateColumns = 'repeat(12, minmax(auto, 1fr))'
   } else {
-    boxContainer.style.gridTemplateColumns = 'repeat(48, minmax(auto, 1fr))'
+    boxContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(5px, 1fr))'
   }
 
   for (let index = 0; index < boxTotal; index++) {
@@ -25,13 +25,13 @@ boxInputSubmit.addEventListener('click', () => {
 
   boxes.forEach(box => {
     if (boxTotal <= 12) {
-      box.style.height = '28px'
+      box.style.height = '100%'
     } else if (boxTotal <= 24) {
-      box.style.height = '12px'
+      box.style.height = '50%'
     } else if (boxTotal <= 36) {
-      box.style.height = '6px'
+      box.style.height = "calc(" + 100 + "/ 3)"
     } else {
-      box.style.height = '4px'
+      box.style.height = '5px'
     }
   })
 
